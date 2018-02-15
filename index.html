@@ -13,10 +13,10 @@
 
 <body>
 
-    <div class="jumbotron jumbotron-fluid">
+    <div class="jumbotron jumbotron-fluid" Style="background-image: url('./assets/images/3D.jpg')">
         <div class="container">
             <h1 class="display-4 text-center">Hangman</h1>
-            <p class="lead">
+            <p class="lead" id="placeholder">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">Press START to begin the game!</li>
                     <li class="list-group-item">Fill the blanks to guess the word!</li>
@@ -25,22 +25,25 @@
             </p>
 
         </div>
+
+        <div id="used"></div>
     </div>
 
-    <div class="container">
+    <div class="container text-center">
         <div class="row">
 
             <div class="col-12">
-                <button type="button" class="btn btn-primary btn-lg">START</button>
-
+                <button type="button" class="btn btn-primary btn-lg" id="start">START</button>
+                <!--<button type="button" class="btn btn-primary btn-lg" id="reset">Reset</button>-->
+                <br><br>
                 <h2>Guesses Left
-                    <span class="badge badge-secondary">10</span>
+                    <span class="badge badge-secondary" id="guessesleft">10</span>
                 </h2>
-                <h2>Wins
-                    <span class="badge badge-secondary">0</span>
+                <h2>Won
+                    <span class="badge badge-secondary" id="wins">0</span>
                 </h2>
-                <h2>Losses
-                    <span class="badge badge-secondary">0</span>
+                <h2>Lost
+                    <span class="badge badge-secondary" id="losses">0</span>
                 </h2>
 
 
