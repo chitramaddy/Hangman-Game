@@ -8,17 +8,17 @@
     <title>Hangman</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/CSS/style.css">
-    <link src="./assets/javascript/game.js">
+    <link type= text/javascript src="./assets/javascript/game.js">
 </head>
 
 <body>
 
-    <div class="jumbotron jumbotron-fluid" Style="background-image: url('./assets/images/3D.jpg')">
-        <div class="container">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container id="placeholder"">
             <h1 class="display-4 text-center">Hangman</h1>
-            <p class="lead" id="placeholder">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Press START to begin the game!</li>
+            <p class="lead">
+                <ul class="list-group list-group-flush" id="guesses">
+                    <li class="list-group-item" id = "start">Press START to begin the game!</li>
                     <li class="list-group-item">Fill the blanks to guess the word!</li>
                     <li class="list-group-item">If you find the word within 10 guesses, you win!</li>
                 </ul>
@@ -34,10 +34,10 @@
 
             <div class="col-12">
                 <button type="button" class="btn btn-primary btn-lg" id="start">START</button>
-                <!--<button type="button" class="btn btn-primary btn-lg" id="reset">Reset</button>-->
+               
                 <br><br>
                 <h2>Guesses Left
-                    <span class="badge badge-secondary" id="guessesleft">10</span>
+                    <span class="badge badge-secondary" id="guessesleft">0</span>
                 </h2>
                 <h2>Won
                     <span class="badge badge-secondary" id="wins">0</span>

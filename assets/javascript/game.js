@@ -1,87 +1,119 @@
-var placeHolder;
 // wordBank Array
-var wordBank = ['afghanistan','australia','brazil', 'canada','china','denmark','egypt','france','greece','germany','india','iran','jamaica','laos','mexico','norway','peru','russia','saudi arabia','united states','venezuela'];
-// any references to HTML DOM Elements (reset button, area for writing stats, letter blanks)
-var letterBlanks = document.getElementById("placeholder");
-var guessedLetters = document.getElementById("guessed");
-var wins = document.getElementById("wins");
-var losses = document.getElementById("losses");
-var guessesleft = document.getElementById("guessesleft");
+var wordBank = ['afghanistan', 'australia', 'brazil', 'canada', 'china', 'denmark', 'egypt', 'france', 'greece', 'germany', 'india', 'iran', 'jamaica', 'laos', 'mexico', 'norway', 'peru', 'russia', 'saudi arabia', 'united states', 'venezuela'];
 
-var start = document.getElementById("start");
-var reset = document.getElementById("reset");
+// any references to HTML DOM Elements (reset button, area for writing stats, letter blanks)
+var pickedWordPlaceholderHTML = document.getElementById("placeholder");
+var guessedLettersHTML = document.getElementById("guesses");
+var winsHTML = document.getElementById("wins");
+var lossesHTML = document.getElementById("losses");
+var guessesleftHTML = document.getElementById("guessesleft");
+
+var startHTML = document.getElementById("start");
 // wins/losses
 var wins = 0;
 var losses = 0;
-var guessesleft = 10;
+var guessesleft;
 
 
 
 // NEW GAME FUNCTION
-function newGame() {
-  // reset guessesLeft to 10
-  reWriteStats: function(rewrite) {
-    guessesleft = 10;
-  }
-  
-  // declare/reset pickedWord Placeholder array
-  var pickedWordPlaceholder = [];
-  // array for guessedLetters
-  var guessedLetters = [];
-  guessedLetters.splice();// clear out existing DOM content from previous game
 
-  // pick our word at random from the wordBank
-  var pickedWord = wordBank[Math.floor(Math.random() * 15)];
-  console.log(pickedWord);
-     
-
-
-  // split pickedWord into an array
-  var pickedWordArray = pickedWord.split('');
-
-  
-  // for loop over pickedWordArray, at each iteration, check IF pickedWordArray[i] === " ", then push in a " " to pickedWordPlaceholder, else push a "_"
-
-  for(var i=0; i < pickedWordArray.length; i++) {
-      if (pickedWordArray[i] === " "){
-          (pickedWordPlaceholder).push(" ");
-          
+document.getElementById("start").addEventListener("click", function newGame() {
+      // reset guessesLeft to 10
+      function reWrite() {
+        guessesleft = 10;
+        console.log(guessesleft);
       }
-      else {
-        (pickedWordPlaceholder).push("-");
 
+      // declare/reset pickedWord Placeholder array
+      var pickedWordPlaceholder = [];
+      // array for guessedLetters
+      var guessedLetters = [];
+      //guessedLetters.splice();// clear out existing DOM content from previous game
+
+      // pick our word at random from the wordBank
+      var pickedWord = wordBank[Math.floor(Math.random() * 15)];
+      console.log(pickedWord);
+
+      // split pickedWord into an array
+      var pickedWordArray = [];
+
+      pickedWordArray = pickedWord.split('');
+
+
+      // for loop over pickedWordArray, at each iteration, check IF pickedWordArray[i] === " ", then push in a " " to pickedWordPlaceholder, else push a "_"
+      function blanks() {
+        for (var i = 0; i < pickedWordArray.length; i++) {
+          if (pickedWordArray[i] === "") {
+            var blanks = pickedWordPlaceholder.push("-");
+            console.log(pickedWordPlaceholder);
+
+          }
+          return blanks;
+        }
       }
-  }
 
-   
-  // write placeholder array to DOM
 
-  document.getElementById("placeholder").innerHTML = placedholderArray;
- 
+      // write placeholder array to DOM
 
-  document.onkeyup = function(event) {
-    // capture event key (letter pressed)
+      document.getElementById("placeholder").innerHTML = blanks();
 
-    // if (guessedLetters.indexOf(letterGuessed) === -1)
-      // Run rest of game
-      // push guessedLetter into guessedLetters array
-      // loop over pickedWordArray
-        // if guessedLetter === arr[i]
-            // replace placeholder[i] with guessedLetter
+
+      placeholder.onkeyup = function (event) {
+        // capture event key (letter pressed)
+
+        var letterGuessed = document.getElementById(used);
+
+        letterGuessed.textContent = event.key;
+
+
+        if (guessedLetters.indexOf(letterGuessed) === -1) {
+          // Run rest of game
+
+          // push guessedLetter into guessedLetters array
+          (guessedLetters).push(letterGuessed);
+
+        }
+
+        // replace placeholder[i] with guessedLetter
+
+        for (var i = 0; i < pickedWordArray.length; i++) {
+
+          if (guessedLetter === pickedWordArray[i]) {
+            pickedWordArray[i] = pickedWordPlaceholder[i].replace(guessedLetter);
+          }
+
+
+          if (placedholderArray.indexOf(guessedLetter) === -1) {
+            // then it's a wrong guess
+            // decrement guessesLeft
+            guessesleft--;
+
+            // check guessesLeft up against 0
+            // if yes, you lose
+            if (guessesleft = 0) {
+              losses++;
+
+              document.getElementById("lead").innerHTML = "You Lost! Press reset to try again!";
+            }
+
+          }
+
+
+          // check to see if placeholderArray.join('') === pickedWordArray.join('')
+          // if yes, you win!
+          if ((placeholderArray).join('') === pickedWordArray.join('')) {
+            wins++;
+            document.getElementById("lead").innerHTML = "You Won! The country is " + pickedWord;
+
+          } else {
+            alert("already used " + user.key)
+          }
+
+          // else alert / write to DOM that user already guessed that letter
+
+        }
+      });
       
-      // if placedholderArray.indexOf(guessedLetter) === -1
-        // then it's a wrong guess
-        // decrement guessesLeft
-      
-      // check guessesLeft up against 0
-        // if yes, you lose
-      
-
-      // check to see if placeholderArray.join('') === pickedWordArray.join('')
-        // if yes, you win!
-  
-
-    // else alert / write to DOM that user already guessed that letter
-  }
-
-}
+      newGame(); 
+      reWrite();
