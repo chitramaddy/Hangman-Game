@@ -1,5 +1,6 @@
 // wordBank Array
 var wordBank = ['afghanistan', 'australia', 'brazil', 'canada', 'china', 'denmark', 'egypt', 'france', 'greece', 'germany', 'india', 'iran', 'jamaica', 'laos', 'mexico', 'norway', 'peru', 'russia', 'saudi arabia', 'united states', 'venezuela'];
+console.log(wordBank);
 
 // any references to HTML DOM Elements (reset button, area for writing stats, letter blanks)
 var pickedWordPlaceholderHTML = document.getElementById("placeholder");
@@ -7,9 +8,9 @@ var guessedLettersHTML = document.getElementById("guesses");
 var winsHTML = document.getElementById("wins");
 var lossesHTML = document.getElementById("losses");
 var guessesleftHTML = document.getElementById("guessesleft");
-
 var startHTML = document.getElementById("start");
 // wins/losses
+
 var wins = 0;
 var losses = 0;
 var guessesleft;
@@ -19,12 +20,9 @@ var guessesleft;
 // NEW GAME FUNCTION
 
 document.getElementById("start").addEventListener("click", function newGame() {
-      // reset guessesLeft to 10
-      function reWrite() {
         guessesleft = 10;
         console.log(guessesleft);
-      }
-
+  
       // declare/reset pickedWord Placeholder array
       var pickedWordPlaceholder = [];
       // array for guessedLetters
@@ -116,4 +114,4 @@ document.getElementById("start").addEventListener("click", function newGame() {
       });
       
       newGame(); 
-      reWrite();
+     
