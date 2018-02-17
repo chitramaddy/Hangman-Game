@@ -18,8 +18,7 @@ var guessesleft;
 
 
 // NEW GAME FUNCTION
-
-document.getElementById("start").addEventListener("click", function newGame() {
+function newGame() {
         guessesleft = 10;
         console.log(guessesleft);
   
@@ -30,21 +29,21 @@ document.getElementById("start").addEventListener("click", function newGame() {
       //guessedLetters.splice();// clear out existing DOM content from previous game
 
       // pick our word at random from the wordBank
-      var pickedWord = wordBank[Math.floor(Math.random() * 15)];
+      var pickedWord = wordBank[Math.floor(Math.random() * 21)];
       console.log(pickedWord);
 
       // split pickedWord into an array
       var pickedWordArray = [];
-
+      
       pickedWordArray = pickedWord.split('');
 
-
+      console.log(pickedWordArray);
       // for loop over pickedWordArray, at each iteration, check IF pickedWordArray[i] === " ", then push in a " " to pickedWordPlaceholder, else push a "_"
       function blanks() {
         for (var i = 0; i < pickedWordArray.length; i++) {
           if (pickedWordArray[i] === "") {
             var blanks = pickedWordPlaceholder.push("-");
-            console.log(pickedWordPlaceholder);
+            console.log(blanks);
 
           }
           return blanks;
@@ -81,6 +80,8 @@ document.getElementById("start").addEventListener("click", function newGame() {
             pickedWordArray[i] = pickedWordPlaceholder[i].replace(guessedLetter);
           }
 
+        }
+
 
           if (placedholderArray.indexOf(guessedLetter) === -1) {
             // then it's a wrong guess
@@ -105,13 +106,15 @@ document.getElementById("start").addEventListener("click", function newGame() {
             document.getElementById("lead").innerHTML = "You Won! The country is " + pickedWord;
 
           } else {
-            alert("already used " + user.key)
+            alert("already used " + user.key);
           }
 
-          // else alert / write to DOM that user already guessed that letter
-
         }
-      });
+          
+
+      }
       
-      newGame(); 
+      document.getElementById("start").addEventListener("click", function() {
+        newGame();
+        });
      

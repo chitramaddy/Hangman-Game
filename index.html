@@ -7,18 +7,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Hangman</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./assets/CSS/style.css">
+    
     
 </head>
 
 <body>   
 
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container id="placeholder"">
+    <div class="jumbotron jumbotron-fluid" id="placeholder">
+        <div class="container">
             <h1 class="display-4 text-center">Hangman</h1>
-            <p class="lead">
+            <p class="lead" id = "lead">
                 <ul class="list-group list-group-flush" id="guesses">
-                    <li class="list-group-item" id = "start">Press START to begin the game!</li>
+                    <li class="list-group-item">Press START to begin the game!</li>
                     <li class="list-group-item">Fill the blanks to guess the word!</li>
                     <li class="list-group-item">If you find the word within 10 guesses, you win!</li>
                 </ul>
@@ -54,7 +54,7 @@
     </div>
 
 
-    <script> src="./assets/js/game.js"</script>
+    <script src="./assets/javascript/game.js"></script>
 
 </body>
 
