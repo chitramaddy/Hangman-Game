@@ -42,6 +42,10 @@ var losses = 0;
 var guessesleft = 10;
 
 function newGame() {
+  gameRunning = true;
+  guessedLetterBank = [];
+  guessesleft = 10;
+
   pickedWordPlaceholderArr = [];
 
   //Pick a random word when a game begins and store it in pickedWord variable
@@ -55,13 +59,56 @@ function newGame() {
     } else {
       pickedWordPlaceholderArr.push("_");
     }
+    pickedWordPlaceholderHTML.textContent = pickedWordPlaceholderArr.join("");
   }
-  pickedWordPlaceholderHTML.textContent = pickedWordPlaceholderArr.join("");
 }
+
+function letterGuess(letter) {
+  console.log(letter);
+  if (gameRunning === true && guessedLetterBank.indexOf(letter) === -1) {
+    guessedLetterBank.push(letter);
+
+    guessedLettersHTML = guessedLetterBank;
+    guessesleftHTML = guessesleft;
+
+    for (var i = 0; i < pickedWord.length; i++) {
+      if (pickedWord[i] === letter.toLowerCase()) {
+        pickedWordPlaceholderArr[i] = pickedWord[i];
+      }
+    }
+    pickedWordPlaceholderHTML.textContent = pickedWordPlaceholderArr.join("");
+
+    checkIncorrect(letter);
+  } else {
+    if (!gameRunning) {
+      alert("The game is not running. Press Start to begin the game.");
+    } else {
+      alert("You already guessed this letter!");
+    }
+  }
+}
+
+function checkIncorrect(letter) {
+  if (
+    pickedWordPlaceholderArr.indexOf(letter.toLowerCase()) === -1 &&
+    pickedWordPlaceholderArr.indexOf(letter.toUpperCase()) === -1
+  ) {
+    guessesleft--;
+    checkLoss();
+  }
+}
+
+function checkLoss() {
+  if (guessesleft === 0) {
+    gameRunning = false;
+    losses++;
+    console.log(losses);
+  }
+}
+
+startHTML.addEventListener("click", newGame);
 
 document.onkeyup = function(event) {
   console.log(event);
-  pickedWordPlaceholderHTML.textContent = event.key;
+  letterGuess(event.key);
 };
-
-startHTML.addEventListener("click", newGame);
