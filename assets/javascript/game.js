@@ -28,29 +28,29 @@ var pickedWordPlaceholderHTML = document.getElementById("placeholder");
 var guessedLettersHTML = document.getElementById("guessed");
 var winsHTML = document.getElementById("wins");
 var lossesHTML = document.getElementById("losses");
-var guessesleftHTML = document.getElementById("guessesleft");
+var guessesLeftHTML = document.getElementById("guessesLeft");
 var startHTML = document.getElementById("start");
 
 // variables
 var pickedWord = "";
 var pickedWordPlaceholderArr = [];
-var guessedLetters = [];
-var incorrectLetters = [];
+var guessedLetterBank = [];
+var incorrectLettersBank = [];
 var gameRunning = false;
 var wins = 0;
 var losses = 0;
-var guessesleft = 10;
+var guessesLeft = 10;
 
 function newGame() {
   gameRunning = true;
   guessedLetterBank = [];
-  guessesleft = 10;
+  incorrectLettersBank = [];
+  guessesLeft = 10;
 
   pickedWordPlaceholderArr = [];
 
   //Pick a random word when a game begins and store it in pickedWord variable
   pickedWord = wordBank[Math.floor(Math.random() * wordBank.length)];
-  console.log(pickedWord);
 
   //write placeholders to the length of pickeword to DOM. Write " " if there is a space between the words.
   for (var i = 0; i < pickedWord.length; i++) {
@@ -59,8 +59,10 @@ function newGame() {
     } else {
       pickedWordPlaceholderArr.push("_");
     }
-    pickedWordPlaceholderHTML.textContent = pickedWordPlaceholderArr.join("");
   }
+  guessesLeftHTML.textContent = guessesLeft;
+  pickedWordPlaceholderHTML.textContent = pickedWordPlaceholderArr.join("");
+  guessedLettersHTML.textContent = guessedLetterBank;
 }
 
 function letterGuess(letter) {
@@ -68,11 +70,11 @@ function letterGuess(letter) {
   if (gameRunning === true && guessedLetterBank.indexOf(letter) === -1) {
     guessedLetterBank.push(letter);
 
-    guessedLettersHTML = guessedLetterBank;
-    guessesleftHTML = guessesleft;
+    guessedLettersHTML.textContent = incorrectLettersBank;
+    guessesLeftHTML.textContent = guessesLeft;
 
     for (var i = 0; i < pickedWord.length; i++) {
-      if (pickedWord[i] === letter.toLowerCase()) {
+      if (pickedWord[i].toLowerCase() === letter.toLowerCase()) {
         pickedWordPlaceholderArr[i] = pickedWord[i];
       }
     }
@@ -80,7 +82,7 @@ function letterGuess(letter) {
 
     checkIncorrect(letter);
   } else {
-    if (!gameRunning) {
+    if (gameRunning === false) {
       alert("The game is not running. Press Start to begin the game.");
     } else {
       alert("You already guessed this letter!");
@@ -93,22 +95,39 @@ function checkIncorrect(letter) {
     pickedWordPlaceholderArr.indexOf(letter.toLowerCase()) === -1 &&
     pickedWordPlaceholderArr.indexOf(letter.toUpperCase()) === -1
   ) {
-    guessesleft--;
-    checkLoss();
+    guessesLeft--;
+    incorrectLettersBank.push(letter);
+    guessedLettersHTML.textContent = incorrectLettersBank.join(",");
+    guessesLeftHTML.textContent = guessesLeft;
   }
+  checkLoss();
 }
 
 function checkLoss() {
-  if (guessesleft === 0) {
+  if (guessesLeft === 0) {
     gameRunning = false;
     losses++;
+    lossesHTML.textContent = losses;
     console.log(losses);
+    pickedWordPlaceholderHTML.textContent = pickedWord;
+  }
+  checkWin();
+}
+
+function checkWin() {
+  if (
+    pickedWord.toLowerCase() === pickedWordPlaceholderArr.join("").toLowerCase()
+  ) {
+    gameRunning = false;
+    wins++;
+    winsHTML.textContent = wins;
   }
 }
 
 startHTML.addEventListener("click", newGame);
 
 document.onkeyup = function(event) {
-  console.log(event);
-  letterGuess(event.key);
+  if (event.keyCode >= 65 && event.keyCode <= 90) {
+    letterGuess(event.key);
+  }
 };
